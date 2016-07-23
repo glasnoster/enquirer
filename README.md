@@ -11,3 +11,6 @@ Enquirer is a simple module to make is easy to get user input in terminal applic
       [{:enquirer, "~> 0.1.0"}]
     end
     ```
+## Usage
+
+See the [documentation](https://hexdocs.pm/enquirer/Enquirer.html).
