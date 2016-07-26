@@ -69,7 +69,8 @@ defmodule Enquirer do
         {:error, nil}
       (user_input == "") && default ->
         {:ok, default}
-      true -> {:error, nil}
+      true ->
+        {:error, nil}
     end
   end
 
@@ -89,11 +90,10 @@ defmodule Enquirer do
   def ask(question, default \\ true) do
     user_input = "#{question} [#{if default, do: "Y/n", else: "y/N"}]" |> do_get
     cond do
-      String.match?(user_input, ~r/^y(es)?/i)  -> {:ok, true}
-      String.match?(user_input, ~r/^n(o)?/i)   -> {:ok, false}
-      (default == true) && (user_input == "")  -> {:ok, true}
-      (default == false) && (user_input == "") -> {:ok, false}
-      true                                     -> {:error, nil}
+      user_input =~ ~r/^y(es)?/i -> {:ok, true}
+      user_input =~ ~r/^n(o)?/i  -> {:ok, false}
+      user_input == ""           -> {:ok, default}
+      true                       -> {:error, nil}
     end
   end
 
