@@ -11,12 +11,12 @@ defmodule Enquirer do
   """
   def say(something, colour \\ nil) do
     ansi = case colour do
-      :red    -> red
-      :green  -> green
-      :yellow -> yellow
+      :red    -> red()
+      :green  -> green()
+      :yellow -> yellow()
       _       -> ""
     end
-    IO.puts "#{ansi}#{something}#{default_color}"
+    IO.puts "#{ansi}#{something}#{default_color()}"
     {:ok, nil}
   end
 
@@ -106,12 +106,12 @@ defmodule Enquirer do
   """
   def get_list(question) do
     IO.puts "#{question}"
-    {:ok, do_get_list}
+    {:ok, do_get_list()}
   end
 
   defp do_get_list do
     option = IO.gets("* ") |> remove_trailing
-    if option != "", do: [option] ++ do_get_list, else: []
+    if option != "", do: [option] ++ do_get_list(), else: []
   end
 
   defp remove_trailing(str) do
